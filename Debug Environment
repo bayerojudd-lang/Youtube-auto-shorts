@@ -1,0 +1,9 @@
+- name: Debug Environment
+  run: |
+    echo "Checking FFmpeg"
+    ffmpeg -version
+    echo "Checking Python"
+    python --version
+    echo "Checking Secrets"
+    echo "PEXELS_API_KEY exists: ${{ secrets.PEXELS_API_KEY != '' }}"
+    echo "YOUTUBE_CREDENTIALS exists: ${{ secrets.YOUTUBE_CREDENTIALS != '' }}"

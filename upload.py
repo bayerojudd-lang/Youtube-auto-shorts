@@ -9,11 +9,21 @@ from googleapiclient.http import MediaFileUpload
 
 # --- STEP 1: Get secrets ---
 pexels_api_key = os.environ.get('PEXELS_API_KEY')
-youtube_credentials_json = os.environ.get('YOUTUBE_CREDENTIALS')
+print(
+    bool(os.environ.get("CLIENT_ID")),
+    bool(os.environ.get("CLIENT_SECRET")),
+    bool(os.environ.get("REFRESH_TOKEN"))
+)
 
-# --- STEP 2: Load YouTube credentials ---
-creds_dict = json.loads(youtube_credentials_json)
-creds = Credentials.from_authorized_user_info(creds_dict, ['https://www.googleapis.com/auth/youtube.upload'])
+creds = Credentials(
+    token=None,
+    refresh_token=os.environ.get("REFRESH_TOKEN"),
+    token_uri="https://oauth2.googleapis.com/token",
+    client_id=os.environ.get("CLIENT_ID"),
+    client_secret=os.environ.get("CLIENT_SECRET"),
+    scopes=["https://www.googleapis.com/auth/youtube.upload"]
+)
+
 
 # --- STEP 3: Search a video on Pexels ---
 search_term = "nature"  # Change this to your topic, e.g., "ocean", "city", "technology"
